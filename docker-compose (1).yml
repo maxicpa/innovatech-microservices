@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
+
+  mongodb:
+    image: mongo:7
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  ms-project:
+    build: ./ms-project
+    container_name: ms-project
+    depends_on:
+      - postgres
+    ports:
+      - "8081:8081"
+
+  ms-resources:
+    build: ./ms-resources
+    container_name: ms-resources
+    depends_on:
+      - postgres
+    ports:
+      - "8082:8082"
+
+  ms-collaboration:
+    build: ./ms-collaboration
+    container_name: ms-collaboration
+    depends_on:
+      - mongodb
+    ports:
+      - "8083:8083"
+
+  ms-analytics:
+    build: ./ms-analytics
+    container_name: ms-analytics
+    depends_on:
+      - postgres
+    ports:
+      - "8084:8084"
+
+volumes:
+  postgres_data:
+  mongo_data:
