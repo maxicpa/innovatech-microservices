@@ -1,5 +1,8 @@
 package cl.innovatech.msproject.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.ArrayList;
+import java.util.List;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
@@ -37,5 +40,9 @@ public class Proyecto {
 
     @Positive(message = "El presupuesto debe ser mayor que cero")
     private Double presupuesto;
+
+    @OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<Tarea> tareas = new ArrayList<>();
 
 }
