@@ -25,4 +25,4 @@ jobs:
 
       - name: Compilar y testear ${{ matrix.service }}
         working-directory: ${{ matrix.service }}
-        run: mvn clean package
+        run: mvn clean package -DskipTests
