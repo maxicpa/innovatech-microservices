@@ -1,0 +1,28 @@
+name: CI - Build y Test
+
+on:
+  push:
+    branches: [ main, develop, "feature/**" ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [ms-project, ms-resources, ms-analytics, ms-collaboration]
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Compilar y testear ${{ matrix.service }}
+        working-directory: ${{ matrix.service }}
+        run: mvn clean package
