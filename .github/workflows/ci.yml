@@ -1,4 +1,4 @@
-name: CI - Build y Test
+﻿name: CI - Build y Test
 
 on:
   push:
@@ -72,4 +72,7 @@ jobs:
           script: |
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/ms-project:latest
             cd innovatech-microservices
+            git pull
+            chmod +x scripts/init-db.sh
+            ./scripts/init-db.sh
             docker-compose up -d ms-project
