@@ -75,4 +75,4 @@ jobs:
             git pull
             chmod +x scripts/init-db.sh
             ./scripts/init-db.sh
-            docker-compose up -d ms-project
+            docker service update --image ${{ secrets.DOCKERHUB_USERNAME }}/ms-project:latest --with-registry-auth innovatech_ms-project
