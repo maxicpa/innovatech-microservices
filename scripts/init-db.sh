@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 set -e
 CONTAINER=$(docker ps -qf "name=innovatech_postgres" | head -n1)
 if [ -z "$CONTAINER" ]; then
