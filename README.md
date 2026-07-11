@@ -93,3 +93,5 @@ Se utilizó Claude (Anthropic) como herramienta de apoyo técnico durante el des
 Proyecto desarrollado para la asignatura JVY0101, Duoc UC.
 
 Prueba CI/CD 07/11/2026 04:56:40
+
+Pipeline deploy fix
